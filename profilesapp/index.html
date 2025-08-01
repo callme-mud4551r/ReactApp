@@ -1,13 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple To-Do List</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    #todoInput { padding: 10px; width: 70%; }
+    #addBtn { padding: 10px; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; }
+    button.remove { background: red; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>📝 My To-Do List</h1>
+  <input type="text" id="todoInput" placeholder="Add a task..." />
+  <button id="addBtn">Add</button>
+  <ul id="todoList"></ul>
+
+  <script>
+    const input = document.getElementById('todoInput');
+    const addBtn = document.getElementById('addBtn');
+    const list = document.getElementById('todoList');
+
+    addBtn.onclick = function() {
+      const task = input.value.trim();
+      if (task !== "") {
+        const li = document.createElement('li');
+        li.innerHTML = `${task} <button class="remove">X</button>`;
+        li.querySelector('.remove').onclick = () => li.remove();
+        list.appendChild(li);
+        input.value = "";
+      }
+    };
+  </script>
+</body>
 </html>
